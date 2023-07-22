@@ -34,15 +34,9 @@ public class AccountController {
     }
 
     //activate/deactivate an account
-    @PutMapping("/activate")
-//    public Optional<> activateAccount(@RequestBody String accountNumber, String status){
-//        Optional<Account> account=accountService.getAccount(accountNumber);
-//        if(account==null){
-//            return new ResponseEntity<>(account,HttpStatus.NOT_FOUND);
-//        }
-//
-//    }
-    public ResponseEntity<Account> activateAccount(@RequestBody Account account, String accountNumber, String status){
+    @PutMapping("/{accountNumber}")
+    public ResponseEntity<Account> activateAccount(@RequestBody Account account,@PathVariable  String accountNumber){
+
         Account currentAccount= accountService.findByAccountNumber(accountNumber);
         if(currentAccount==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -11,7 +11,7 @@ public class Account {
     public String id;
 
     @Column(name = "accountNumber")
-    public Long accountNumber;
+    public String accountNumber;
 
     @Column(name = "accountName")
     public String accountName;
@@ -38,11 +38,11 @@ public class Account {
         this.id = id;
     }
 
-    public Long getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(Long accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 

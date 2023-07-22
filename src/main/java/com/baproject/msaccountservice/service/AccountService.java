@@ -21,9 +21,6 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-//    public Optional<Account> getAccount(String accountNumber){
-//        return accountRepository.findByAccountNumber(accountNumber);
-//    }
     public Account findByAccountNumber(String accountNumber){
         return accountRepository.findByAccountNumber(accountNumber);
     }
