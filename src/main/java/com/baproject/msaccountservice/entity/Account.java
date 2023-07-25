@@ -1,6 +1,11 @@
 package com.baproject.msaccountservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 //import org.springframework.data.annotation.Id;
 
 @Entity
@@ -23,6 +28,7 @@ public class Account {
     public double currentBalance;
 
     @Column(name = "createdDate")
+    @JsonIgnore
     public String createdDate;
 
     @Column(name = "status")
@@ -75,6 +81,9 @@ public class Account {
     }
 
     public void setCreatedDate(String createdDate) {
+//        Date date = new Date();
+//        SimpleDateFormat DateFor = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//        String timestamp = DateFor.format(date);
         this.createdDate = createdDate;
     }
 
