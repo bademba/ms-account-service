@@ -1,5 +1,6 @@
 package com.baproject.msaccountservice.entity;
 
+import com.baproject.msaccountservice.utils.AccountCreationDate;
 import com.baproject.msaccountservice.utils.AccountNumberGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -29,6 +30,7 @@ public class Account {
 
     @Column(name = "createdDate")
     @JsonIgnore
+    @GeneratorType(type = AccountCreationDate.class,when = GenerationTime.INSERT)
     public String createdDate;
 
     @Column(name = "status")
@@ -81,9 +83,6 @@ public class Account {
     }
 
     public void setCreatedDate(String createdDate) {
-//        Date date = new Date();
-//        SimpleDateFormat DateFor = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//        String timestamp = DateFor.format(date);
         this.createdDate = createdDate;
     }
 
