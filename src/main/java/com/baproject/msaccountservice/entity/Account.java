@@ -1,11 +1,10 @@
 package com.baproject.msaccountservice.entity;
 
+import com.baproject.msaccountservice.utils.AccountNumberGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.GeneratorType;
 //import org.springframework.data.annotation.Id;
 
 @Entity
@@ -16,6 +15,7 @@ public class Account {
     public String id;
 
     @Column(name = "accountNumber")
+    @GeneratorType(type = AccountNumberGenerator.class,when = GenerationTime.INSERT)
     public String accountNumber;
 
     @Column(name = "accountName")
