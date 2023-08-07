@@ -29,7 +29,7 @@ public class Account {
     public double currentBalance;
 
     @Column(name = "createdDate")
-    @JsonIgnore
+    //@JsonIgnore
     @GeneratorType(type = AccountCreationDate.class,when = GenerationTime.INSERT)
     public String createdDate;
 

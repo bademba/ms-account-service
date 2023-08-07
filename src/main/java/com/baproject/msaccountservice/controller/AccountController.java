@@ -30,13 +30,15 @@ public class AccountController {
     //create a new account
     @PostMapping("/")
     public ResponseEntity createAccount(@RequestBody Account account){
-        return ResponseEntity.ok(accountService.createAccount(account));
+        //return ResponseEntity.ok(accountService.createAccount(account));
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Account created",HttpStatus.CREATED,accountService.createAccount(account),timestamp);
     }
 
     //list accounts
     @GetMapping("/")
     public ResponseEntity<Object> listAccounts(){
-        return ResponseEntity.ok(accountService.listAccounts());
+       // return ResponseEntity.ok(accountService.listAccounts());
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Accounts retrieved",HttpStatus.OK,accountService.listAccounts(),timestamp);
     }
 
     //activate/deactivate an account
