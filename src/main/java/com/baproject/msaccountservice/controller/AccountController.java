@@ -42,6 +42,15 @@ public class AccountController {
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Accounts retrieved",HttpStatus.OK,accountService.listAccounts(),timestamp);
     }
 
+    @GetMapping("/{accountNumber}")
+    public ResponseEntity<Object> findAccount(@PathVariable String accountNumber){
+        Account currentAccount= accountService.findByAccountNumber(accountNumber);
+        if(currentAccount==null){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Account not found",HttpStatus.NOT_FOUND,"",timestamp);
+        }
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Account details found",HttpStatus.OK,currentAccount,timestamp);
+    }
+
     //activate/deactivate an account
     @PutMapping("/{accountNumber}")
     public ResponseEntity<Object> activateAccount(@RequestBody Account account, @PathVariable  String accountNumber){
@@ -59,7 +68,12 @@ public class AccountController {
     @PostMapping("/deposit/{accountNumber}")
     public ResponseEntity<Object> deposit(@PathVariable String accountNumber, @RequestBody Map<String ,Double> request){
         Double amount =request.get("amount");
-        //return accountService.deposit(accountNumber,amount);
-        return ResponseHandler.generateResponse(UUID.randomUUID(),"Deposit of successful",HttpStatus.OK,accountService.deposit(accountNumber,amount),timestamp);
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Deposit successful",HttpStatus.OK,accountService.deposit(accountNumber,amount),timestamp);
+    }
+
+    @PostMapping("/withdraw/{accountNumber}")
+    public ResponseEntity<Object> withdraw(@PathVariable String accountNumber, @RequestBody Map<String ,Double> request){
+        Double amount =request.get("amount");
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Withdrawal successful",HttpStatus.OK,accountService.withdraw(accountNumber,amount),timestamp);
     }
 }
