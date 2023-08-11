@@ -22,7 +22,7 @@ Logs are created in the /logs folder
 
 Retrieves all account within the banking system
 
-![](/home/ba/Pictures/BAnking/ListAllAccount.png)
+![](/home/ba/IdeaProjects/ms-account-service/src/main/resources/images/ListAllAccount.png)
 
 ### 2. Create an account
 
@@ -36,28 +36,28 @@ This API creates an account with the following as inputs:
 
 **NB**: Account number will be generated automatically by the system and doesn't need to be generated withing the request body to avoid conflicts. 
 
-![](/home/ba/Pictures/BAnking/CreateAccount.png)
+![](/home/ba/IdeaProjects/ms-account-service/src/main/resources/images/CreateAccount.png)
 
 ### 3. Find an account by accountNumber 
 
 Retrieve account details
 
-![](/home/ba/Pictures/BAnking/FindAccountByAccNumber.png)
+![](/home/ba/IdeaProjects/ms-account-service/src/main/resources/images/FindAccountByAccNumber.png)
 
 ### 4. Activate /Deactivate an account
 
 Activate or deactivate an account
 
-![](/home/ba/Pictures/BAnking/Activate_Deactivate.png)
+![](/home/ba/IdeaProjects/ms-account-service/src/main/resources/images/Activate_Deactivate.png)
 
 ### 5. Deposit to an account 
 
 Deposit money to an account
 
-![](/home/ba/Pictures/BAnking/Deposit.png)
+![](/home/ba/IdeaProjects/ms-account-service/src/main/resources/images/Deposit.png)
 
 ### 6. Withdraw from an account
 
 Withdraw funds from an account
 
-![](/home/ba/Pictures/BAnking/Withdraw.png)
+![](/home/ba/IdeaProjects/ms-account-service/src/main/resources/images/Withdraw.png)
