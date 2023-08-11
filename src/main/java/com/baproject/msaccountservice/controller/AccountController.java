@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -53,5 +54,12 @@ public class AccountController {
         Account updatedAccount =accountRepository.save(currentAccount);
         //return new ResponseEntity<>(updatedAccount,HttpStatus.OK);
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Account updated",HttpStatus.OK,updatedAccount,timestamp);
+    }
+
+    @PostMapping("/deposit/{accountNumber}")
+    public ResponseEntity<Object> deposit(@PathVariable String accountNumber, @RequestBody Map<String ,Double> request){
+        Double amount =request.get("amount");
+        //return accountService.deposit(accountNumber,amount);
+        return ResponseHandler.generateResponse(UUID.randomUUID(),"Deposit of successful",HttpStatus.OK,accountService.deposit(accountNumber,amount),timestamp);
     }
 }

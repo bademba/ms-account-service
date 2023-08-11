@@ -24,4 +24,16 @@ public class AccountService {
     public Account findByAccountNumber(String accountNumber){
         return accountRepository.findByAccountNumber(accountNumber);
     }
+
+    public Account deposit(String accountNumber,double amount){
+        Account account = findByAccountNumber(accountNumber);
+//        Account account =findByAccountNumber(accountNumber).orElseThrow(()-> {
+//            return new RuntimeException("Account not found");
+//        });
+        if(account ==null){
+            throw new RuntimeException("Account not found");
+        }
+        account.setCurrentBalance(account.getCurrentBalance()+amount);
+        return accountRepository.save(account);
+    }
 }
