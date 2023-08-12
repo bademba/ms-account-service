@@ -67,12 +67,20 @@ public class AccountController {
 
     @PostMapping("/deposit/{accountNumber}")
     public ResponseEntity<Object> deposit(@PathVariable String accountNumber, @RequestBody Map<String ,Double> request){
+        Account currentAccount= accountService.findByAccountNumber(accountNumber);
+        if(currentAccount==null){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Account not found",HttpStatus.NOT_FOUND,"",timestamp);
+        }
         Double amount =request.get("amount");
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Deposit successful",HttpStatus.OK,accountService.deposit(accountNumber,amount),timestamp);
     }
 
     @PostMapping("/withdraw/{accountNumber}")
     public ResponseEntity<Object> withdraw(@PathVariable String accountNumber, @RequestBody Map<String ,Double> request){
+        Account currentAccount= accountService.findByAccountNumber(accountNumber);
+        if(currentAccount==null){
+            return ResponseHandler.generateResponse(UUID.randomUUID(),"Account not found",HttpStatus.NOT_FOUND,"",timestamp);
+        }
         Double amount =request.get("amount");
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Withdrawal successful",HttpStatus.OK,accountService.withdraw(accountNumber,amount),timestamp);
     }

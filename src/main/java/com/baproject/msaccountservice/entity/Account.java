@@ -34,7 +34,8 @@ public class Account {
     public String createdDate;
 
     @Column(name = "status")
-    public String status;
+    @Enumerated(EnumType.STRING)
+    public Status status;
 
     public Account(){}
 
@@ -86,11 +87,11 @@ public class Account {
         this.createdDate = createdDate;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }
