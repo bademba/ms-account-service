@@ -3,6 +3,7 @@ package com.baproject.msaccountservice.logging;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import com.baproject.msaccountservice.controller.AccountController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
@@ -21,6 +23,8 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 public class LoggingFilter extends OncePerRequestFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggingFilter.class);
+    @Autowired
+    AccountController accountController;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -59,7 +63,7 @@ public class LoggingFilter extends OncePerRequestFilter {
         //end of OS details
 
         LOGGER.info(
-                "REQUEST::"+"|logId="+responseId+"|Method="+request.getMethod()+"| RequestURI=" +request.getRequestURI()+"|User-Agent="+request.getHeader("User-Agent")+"| OS="+browserDetails+"| RequestBody="+requestBody+"| ResponseCode="+ response.getStatus()+"| ResponseBody="+ responseBody
+                "REQUEST::"+"|logId="+responseId+"|Method="+ request.getMethod()+"| Operation=" +accountController.getClass().getName()+"| RequestURI=" +request.getRequestURI()+"|User-Agent="+request.getHeader("User-Agent")+"| OS="+browserDetails+"| RequestBody="+requestBody+"| ResponseCode="+ response.getStatus()+"| ResponseBody="+ responseBody
                         +"| TimeTaken(ms)="+timeTaken+"|SourceIP="+request.getRemoteAddr()+ " |RemotePort="+request.getRemotePort()+" |ServerName=" +request.getServerName() +"|RemoteHost="+request.getRemoteHost() );
 
         responseWrapper.copyBodyToResponse();
