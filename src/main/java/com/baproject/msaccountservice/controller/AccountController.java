@@ -5,9 +5,9 @@ import com.baproject.msaccountservice.entity.Transactions;
 import com.baproject.msaccountservice.repository.AccountRepository;
 import com.baproject.msaccountservice.response.ResponseHandler;
 import com.baproject.msaccountservice.service.AccountService;
+import com.baproject.msaccountservice.service.TransactionsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,8 +26,14 @@ public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
 
+//    @Autowired
+//    private RestTemplate restTemplate;
+
     @Autowired
-    private RestTemplate restTemplate;
+    TransactionsService transactionsService;
+
+
+    RestTemplate restTemplate = new RestTemplate();
 
     Date date = new Date();
     SimpleDateFormat DateFor = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -81,8 +87,11 @@ public class AccountController {
         }
         Double amount =request.get("amount");
         //
-        String transactionUrl= "localhost:9193/v1/transactions/";
-//        Transactions tx=restTemplate.postForObject(transactionUrl,Transactions.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<TransactionsService> requestBody = new HttpEntity<>(transactionsService, headers);
+        String transactionUrl= "http://localhost:9193/v1/transactions/";
+       Transactions tx=restTemplate.postForObject(transactionUrl,requestBody,Transactions.class);
         //
         return ResponseHandler.generateResponse(UUID.randomUUID(),"Deposit successful",HttpStatus.OK,accountService.deposit(accountNumber,amount),timestamp);
     }

@@ -63,7 +63,7 @@ public class LoggingFilter extends OncePerRequestFilter {
         //end of OS details
 
         LOGGER.info(
-                "REQUEST::"+"|logId="+responseId+"|Method="+ request.getMethod()+"| Operation=" +accountController.getClass().getName()+"| RequestURI=" +request.getRequestURI()+"|User-Agent="+request.getHeader("User-Agent")+"| OS="+browserDetails+"| RequestBody="+requestBody+"| ResponseCode="+ response.getStatus()+"| ResponseBody="+ responseBody
+                "REQUEST::"+"|logId="+responseId+"|Method="+ request.getMethod()+"| RequestURI=" +request.getRequestURI()+"|User-Agent="+request.getHeader("User-Agent")+"| OS="+browserDetails+"| RequestBody="+requestBody+"| ResponseCode="+ response.getStatus()+"| ResponseBody="+ responseBody
                         +"| TimeTaken(ms)="+timeTaken+"|SourceIP="+request.getRemoteAddr()+ " |RemotePort="+request.getRemotePort()+" |ServerName=" +request.getServerName() +"|RemoteHost="+request.getRemoteHost() );
 
         responseWrapper.copyBodyToResponse();
