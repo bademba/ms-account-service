@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  mysqldb:
+    platform: linux/x86_64
+    container_name: mysqldb
+    image: mysql:8.0
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: springbootuser
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 30ebf2c4-5bd2-4d4e-88a2-9c1aa2c68d1E
+      MYSQL_ROOT_PASSWORD: 30ebf2c4-5bd2-4d4e-88a2-9c1aa2c68d1E
+  ms-account-service:
+    build:
+      context: "./"
+      dockerfile: "Dockerfile"
+    restart: always
+    container_name: ms-account-service
+    image: ms-account-service
+    ports:
+      - 9193:9193
+    depends_on:
+      - mysqldb
+networks:
+  network1:
+    name: springboot-mysql-net
